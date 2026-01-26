@@ -20,7 +20,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <span>Featured Projects</span>
       </h2>
 
-      <GitHubStats username="EveSunMaple" repositoryName="Frosti" showLanguages={true} showContributors={true} />
+      <GitHubStats username="NullSetx" repositoryName="FFmpegBox" showLanguages={true} showContributors={true} />
     </section>
 
     <!-- My Repositories -->
@@ -31,17 +31,15 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       </h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <RepositoryCard repo="EveSunMaple/Frosti" isPinned={true} />
-        <RepositoryCard repo="EveSunMaple/SaroProck" isPinned={true} />
-        <RepositoryCard repo="EveSunMaple/astion-static" />
-        <RepositoryCard repo="EveSunMaple/astro-update-theme" />
-        <RepositoryCard repo="EveSunMaple/Word-testing-application" />
-        <RepositoryCard repo="EveSunMaple/Smooth-Snake-Game" />
+        <RepositoryCard repo="NullSetx/Mat-YOLO" isPinned={true} />
+        <RepositoryCard repo="NullSetx/ncmdump" isPinned={true} />
+        <RepositoryCard repo="NullSetx/FFmpegBox" />
+
       </div>
 
       <div class="flex justify-center mt-10">
         <a
-          href="https://github.com/EveSunMaple?tab=repositories"
+          href="https://github.com/NullSetx?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn-outline gap-2"
@@ -53,7 +51,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     </section>
 
     <!-- Open Source Contributions -->
-    <section class="py-4">
+    <!-- <section class="py-4">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
         <Icon name="lucide:git-pull-request" class="w-6 h-6 text-primary" />
         <span>Open Source Contributions</span>
@@ -102,6 +100,6 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
           }
         </ul>
       </div>
-    </section>
+    </section> -->
   </MainCard>
 </BaseLayout>

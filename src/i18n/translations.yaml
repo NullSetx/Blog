@@ -1,5 +1,8 @@
 en:
   label:
+    techStack: Tech Stack
+    githubStats: GitHub Statistics
+    recentActivity: Recent Activity
     noTag: No tags assigned
     tagCard: Tags
     tagPage: Tag
@@ -63,6 +66,9 @@ en:
     12: December
 zh:
   label:
+    techStack: 技术栈
+    githubStats: GitHub 统计
+    recentActivity: 最近活动
     noTag: 未分配标签
     tagCard: 标签
     tagPage: 标签

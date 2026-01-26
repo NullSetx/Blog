@@ -1,0 +1,85 @@
+---
+import { SITE_LANGUAGE, t } from "@config";
+import { Icon } from "astro-icon/components";
+
+// Generate a unique ID for each component instance
+const uniqueId = `language-toggle-${Math.random().toString(36).substring(2, 11)}`;
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props as Props;
+
+// 支持的语言列表
+const SUPPORTED_LANGUAGES = [
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "zh", label: "中文", flag: "🇨🇳" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "ja", label: "日本語", flag: "🇯🇵" },
+  { code: "ko", label: "한국어", flag: "🇰🇷" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "ru", label: "Русский", flag: "🇷🇺" },
+  { code: "pt", label: "Português", flag: "🇵🇹" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+];
+
+const currentLang = SUPPORTED_LANGUAGES.find((lang) => lang.code === SITE_LANGUAGE) || SUPPORTED_LANGUAGES[0];
+---
+
+<div id={uniqueId} class:list={["dropdown dropdown-end", className]}>
+  <button
+    class="btn btn-circle btn-md bg-base-100 shadow-sm hover:scale-110"
+    aria-label="Switch language"
+    title="Switch language"
+  >
+    <span class="text-lg">{currentLang.flag}</span>
+  </button>
+  <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+    {
+      SUPPORTED_LANGUAGES.map((lang) => (
+        <li>
+          <button
+            class:list={["language-option", { active: lang.code === SITE_LANGUAGE }]}
+            data-lang={lang.code}
+          >
+            <span class="text-lg">{lang.flag}</span>
+            <span>{lang.label}</span>
+            {lang.code === SITE_LANGUAGE && <Icon name="lucide:check" class="w-4 h-4" />}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script define:vars={{ SUPPORTED_LANGUAGES }}>
+  document.addEventListener("astro:page-load", () => {
+    const languageOptions = document.querySelectorAll(".language-option");
+
+    languageOptions.forEach((option) => {
+      option.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const selectedLang = option.getAttribute("data-lang");
+
+        // 将选择的语言保存到 localStorage
+        localStorage.setItem("preferred-language", selectedLang);
+
+        // 重新加载页面以应用新语言
+        // 注意：这需要在后端支持，通过 URL 参数或 cookie 来改变语言
+        window.location.reload();
+      });
+    });
+  });
+</script>
+
+<style>
+  .language-option {
+    @apply flex items-center justify-between w-full px-4 py-2 rounded hover:bg-base-200 transition-colors;
+  }
+
+  .language-option.active {
+    @apply bg-primary text-primary-content;
+  }
+</style>
