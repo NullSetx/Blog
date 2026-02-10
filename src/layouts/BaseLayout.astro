@@ -5,6 +5,7 @@ import Header from "@components/Header.astro";
 import Navbar from "@components/Navbar.astro";
 import Sidebar from "@components/Sidebar.astro";
 import MobileTOC from "@components/widgets/MobileTOC.astro";
+import Waline from "@/components/comments/Waline.astro";
 import {
   SITE_DESCRIPTION,
   SITE_FAVICON,
@@ -71,7 +72,10 @@ const {
         >
           <div class="flex-grow flex flex-col gap-4">
             <slot />
+            
           </div>
+          <!-- 评论功能 -->
+          <slot name="comments" />
           <Footer />
         </main>
         <aside class="col-span-1 bg-transparent order-2 md:order-1 md:top-4">
