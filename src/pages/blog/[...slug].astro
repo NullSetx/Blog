@@ -7,6 +7,7 @@ import { DATE_FORMAT } from "@config";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import dayjs from "@utils/dayjs";
 import MainCard from "@/components/MainCard.astro";
+import Waline from "@/components/comments/Waline.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -62,6 +63,16 @@ const url = new URL(`/blog/${blog.slug}`, Astro.url.origin);
           time={remarkPluginFrontmatter.readingTime}
         />
       </div>
+      
+      <section slot="comments" class="comments">
+        <!-- <h2>Comments</h2> -->
+        <div class="bg-base-100 rounded-xl shadow-lg w-full p-4">
+      <Waline serverURL="https://your-waline-server.vercel.app" />
     </div>
+  </section>
+    </div>
+    
   </MainCard>
+
+
 </BaseLayout>
