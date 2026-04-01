@@ -133,22 +133,28 @@ export function generatePageLinks(totalPages: number): {
   active: string[];
   hidden: string[];
 } {
+  if (
+    !Number.isFinite(totalPages) ||
+    !Number.isInteger(totalPages) ||
+    totalPages < 0
+  ) {
+    throw new RangeError("totalPages must be a non-negative integer");
+  }
+
   const pages = {
     active: [] as string[],
     hidden: [] as string[],
   };
 
   if (totalPages > 3) {
-    pages.active.push("1");
-    pages.active.push("...");
-    pages.active.push(totalPages.toString());
+    pages.active.push("1", "...", totalPages.toString());
     for (let i = 2; i <= totalPages - 1; i++) {
       pages.hidden.push(i.toString());
     }
   } else {
-    for (let i = 1; i <= totalPages; i++) {
-      pages.active.push(i.toString());
-    }
+    pages.active.push(
+      ...Array.from({ length: totalPages }, (_, i) => (i + 1).toString()),
+    );
   }
 
   return pages;
@@ -164,14 +170,22 @@ export async function getPostsWithStats(
 ): Promise<any[]> {
   return Promise.all(
     posts.map(async (blog: CollectionEntry<"blog">) => {
-      const { remarkPluginFrontmatter } = await blog.render();
-      return {
-        ...blog,
-        remarkPluginFrontmatter: {
-          readingTime: remarkPluginFrontmatter.readingTime,
-          totalCharCount: remarkPluginFrontmatter.totalCharCount,
-        },
-      };
+      try {
+        const { remarkPluginFrontmatter } = await blog.render();
+        return {
+          ...blog,
+          remarkPluginFrontmatter: {
+            readingTime: remarkPluginFrontmatter.readingTime,
+            totalCharCount: remarkPluginFrontmatter.totalCharCount,
+          },
+        };
+      } catch (err) {
+        console.error("[blog] failed to render post stats", {
+          slug: blog.slug,
+          err,
+        });
+        throw new Error(`Failed to render blog stats for slug: ${blog.slug}`);
+      }
     }),
   );
 }

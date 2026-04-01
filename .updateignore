@@ -19,8 +19,8 @@ public/
 README.md
 docs/README.zh-CN.md
 #评论系统
-src\components\comments
-src\pages\blog\[...slug].astro
+src/components/comments
+src/pages/blog/[...slug].astro
 # --- Git 和构建输出 ---
 .git/
 dist/
