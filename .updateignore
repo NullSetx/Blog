@@ -18,7 +18,9 @@ public/
 # 保护您自己的 README 文件
 README.md
 docs/README.zh-CN.md
-
+#评论系统
+src\components\comments
+src\pages\blog\[...slug].astro
 # --- Git 和构建输出 ---
 .git/
 dist/
