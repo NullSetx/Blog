@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # pagefind
 public/pagefind/
+
+# deploy script
+deploy.sh
+
+# reference posts
+reference-posts/
